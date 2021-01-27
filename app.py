@@ -1,7 +1,7 @@
 from flask import Flask, escape, url_for
 from flask_pymongo import PyMongo
 import requests
-import json,re
+import json,re,os
 def to_dict(movie):
     movie = movie.replace(' ','').replace(',','').replace('链接：','').replace('链接:','')
     link = re.findall(r'https?://[^\s]+', movie)
@@ -32,4 +32,5 @@ def index(page):
     for item in mongo.db.user.find({},{"_id":0}).limit(page):
         r.append(item)
     return json.dumps(r)
-app.run(debug=False,host='0.0.0.0')
+port = int(os.environ.get('PORT', 5000))
+app.run(debug=False,port=port,host='0.0.0.0')
