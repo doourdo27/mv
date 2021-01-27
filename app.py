@@ -32,7 +32,7 @@ def renew():
     print("renew!! ")
 
 @app.route('/new/')
-def new(page):
+def new():
     renew()
     return 'success'
 @app.route('/<int:page>')
